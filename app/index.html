@@ -1,0 +1,92 @@
+<!doctype html>
+<!-- ClipFusion 진입 HTML — React Flow 앱 마운트 지점 -->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClipFusion</title>
+    <!-- 무료 한글 글꼴 (Google Fonts, OFL) — 텍스트 메모 에디터용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Black+Han+Sans&family=Gaegu&family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
+    <style>
+      .proj-row:hover { background: #14171f !important; }
+      .proj-row:hover .proj-del { opacity: 1 !important; }
+      /* 홈 갤러리 카드 — 호버 시 테두리 강조 + 삭제 버튼 노출 */
+      .proj-card:hover > div:first-child { border-color: #7c5cff !important; }
+      .proj-card:hover .proj-card-del { opacity: 1 !important; }
+      .add-item:not(:disabled):hover { background: #1f2431 !important; }
+      /* 연결 중 대상 핸들: 연결 가능=색 변화 없음, 불가=빨강 (v12 클래스 넓게 커버) */
+      .react-flow__handle.connectingto:not(.valid):not(.react-flow__handle-valid) {
+        background: #ff4d6d !important; box-shadow: 0 0 0 4px rgba(255,77,109,.5) !important;
+      }
+      .react-flow__connection-path { stroke: #8b6cff; stroke-width: 2; }
+      /* 빈 캔버스는 항상 기본 화살표(grab/포인터 새는 것 방지), 실제 드래그 이동 중만 손 모양 */
+      .react-flow__pane { cursor: default !important; }
+      .react-flow__pane.dragging { cursor: grabbing !important; }
+      /* 생성 중 로딩 스피너 회전 */
+      @keyframes nova-spin { to { transform: rotate(360deg); } }
+      /* 다중 선택 후 남는 묶음 상자 숨김 — 그룹(프레임) 기능이 따로 있어 불필요. 선택 표시는 노드 테두리로 충분,
+         선택 노드 아무거나 끌면 같이 이동하는 동작은 유지됨 */
+      .react-flow__nodesselection-rect { display: none !important; }
+      /* 노드 제목 — 줌 아웃 시 화면상 크기가 일정하도록 역보정(13px/zoom, 14~46px 클램프). --rf-zoom은 ZoomButton이 갱신 */
+      .cf-node-title { font-size: clamp(14px, calc(13px / var(--rf-zoom, 1)), 46px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+      /* 그룹(프레임) 라벨 — 원래 22px, 줌 아웃 시 화면상 20px 유지(최대 96px) */
+      .cf-frame-title { font-size: clamp(22px, calc(20px / var(--rf-zoom, 1)), 96px); }
+      /* Substance Designer 스타일 슬라이더 — 얇은 선 트랙 + 작은 원 손잡이 */
+      input[type="range"].sbs-slider {
+        -webkit-appearance: none; appearance: none; height: 14px; background: transparent; cursor: pointer; margin: 0;
+      }
+      input[type="range"].sbs-slider::-webkit-slider-runnable-track {
+        height: 2px; border-radius: 2px; background: #4a4a4d;
+      }
+      input[type="range"].sbs-slider::-webkit-slider-thumb {
+        -webkit-appearance: none; appearance: none; width: 11px; height: 11px; border-radius: 50%;
+        background: #c3c7d0; border: 1px solid #6b6b70; margin-top: -5px;
+      }
+      input[type="range"].sbs-slider:hover::-webkit-slider-thumb { background: #e8ebf2; }
+      input[type="range"].sbs-slider::-moz-range-track { height: 2px; border-radius: 2px; background: #4a4a4d; }
+      input[type="range"].sbs-slider::-moz-range-thumb {
+        width: 11px; height: 11px; border-radius: 50%; background: #c3c7d0; border: 1px solid #6b6b70;
+      }
+      /* 노드 연결선(엣지)·연결 중 라인 — 기본이 얇아 잘 안 보여 두껍게 */
+      .react-flow__edge-path { stroke-width: 2.2px; }
+      .react-flow__connection-path, .react-flow__connectionline path { stroke-width: 2.2px; }
+      /* 앱 전역 스크롤바 — 어두운 얇은 바(기본 밝은 스크롤바가 다크 UI에 튀는 것 방지). 텍스트영역·드롭다운·패널 공통 */
+      * { scrollbar-width: thin; scrollbar-color: #4a4a4d transparent; }
+      *::-webkit-scrollbar { width: 8px; height: 8px; }
+      *::-webkit-scrollbar-track { background: transparent; }
+      *::-webkit-scrollbar-thumb { background: #4a4a4d; border-radius: 4px; }
+      *::-webkit-scrollbar-thumb:hover { background: #6a6a6e; }
+      /* 레퍼런스 노드 썸네일 줄 가로 스크롤바 — 노드 테마(앰버)에 맞춘 얇은 바 */
+      .ref-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,180,84,.55) transparent; }
+      .ref-scroll::-webkit-scrollbar { height: 6px; }
+      .ref-scroll::-webkit-scrollbar-track { background: transparent; }
+      .ref-scroll::-webkit-scrollbar-thumb { background: rgba(255,180,84,.55); border-radius: 3px; }
+      .ref-scroll::-webkit-scrollbar-thumb:hover { background: #ffb454; }
+      /* SortableJS 썸네일 정렬 — 놓을 위치는 세로선(placeholder), 커서 따라오는 클론은 원본 크기 그대로 */
+      @keyframes cf-ghost-collapse { from { width: 52px; min-width: 52px; } to { width: 4px; min-width: 4px; } }
+      .cf-thumb.sortable-ghost { width: 4px !important; min-width: 4px !important; height: 52px !important; background: #ffb454 !important; border: 0 !important; border-radius: 2px !important; box-shadow: 0 0 8px #ffb45499; opacity: 1 !important; overflow: visible !important; animation: cf-ghost-collapse 5s ease; }
+      .cf-thumb.sortable-ghost > * { display: none !important; }
+      .cf-thumb.sortable-drag, .cf-thumb.sortable-fallback { opacity: 1 !important; }
+      /* 드래그 중 나머지 썸네일 35% 어둡게 — 잡은 것과 놓을 위치(세로선)에 집중 */
+      .cf-thumb { transition: filter .15s ease; }
+      .cf-dragging .cf-thumb:not(.sortable-ghost) { filter: brightness(0.65); }
+      .cf-thumb.sortable-chosen, .cf-thumb:active { cursor: grabbing; }
+      /* 수치 직접 타이핑 필드 — 평소 텍스트처럼 자연스럽게, 호버/포커스 때만 아주 옅은 배경 */
+      .num-field { border: 0; background: transparent; border-radius: 4px; outline: none; }
+      .num-field:hover { background: #2a2a2d; }
+      .num-field:focus { background: #2a2a2d; }
+      .num-field::selection { background: #3d3d42; }
+      /* 그룹 프레임은 몸통을 클릭 통과시켜 안쪽 노드·연결선(삭제 점)을 조작 가능하게. 헤더·리사이즈 핸들만 잡힘 */
+      .react-flow__node-frame { pointer-events: none !important; }
+      .react-flow__node-frame .cf-frame-header,
+      .react-flow__node-frame .react-flow__resize-control { pointer-events: auto !important; }
+    </style>
+    <script type="module" crossorigin src="/app/assets/index-D8VDBK-B.js"></script>
+    <link rel="stylesheet" crossorigin href="/app/assets/index-B2Kz5wtG.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
