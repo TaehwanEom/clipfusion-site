@@ -11,12 +11,455 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Black+Han+Sans&family=Gaegu&family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
     <style>
-      .proj-row:hover { background: #14171f !important; }
+      /* ── 에디트 뷰 전체 테마 토큰(자동생성). 다크=원본, 라이트=data-theme="light" ── */
+      :root {
+        --c-0000ff: #0000ff;
+        --c-00ff00: #00ff00;
+        --c-00ffff: #00ffff;
+        --c-06302c: #06302c;
+        --c-0b0b0e: #0b0b0e;
+        --c-0b1a2b: #0b1a2b;
+        --c-0c0c0c: #0c0c0c;
+        --c-0c1f16: #0c1f16;
+        --c-0c1f1a: #0c1f1a;
+        --c-0d0f14: #0d0f14;
+        --c-111112: #111112;
+        --c-12b6c9: #12b6c9;
+        --c-141418: #141418;
+        --c-14351f: #14351f;
+        --c-151515: #151515;
+        --c-151922: #151922;
+        --c-161616: #161616;
+        --c-16171b: #16171b;
+        --c-16293a: #16293a;
+        --c-16332a: #16332a;
+        --c-17191e: #17191e;
+        --c-182231: #182231;
+        --c-191919: #191919;
+        --c-191a1f: #191a1f;
+        --c-1a1a1a: #1a1a1a;
+        --c-1a1a1c: #1a1a1c;
+        --c-1a1d26: #1a1d26;
+        --c-1a2605: #1a2605;
+        --c-1b1b1b: #1b1b1b;
+        --c-1b1b1e: #1b1b1e;
+        --c-1b1c21: #1b1c21;
+        --c-1b1e25: #1b1e25;
+        --c-1c1c1c: #1c1c1c;
+        --c-1c1c1f: #1c1c1f;
+        --c-1c2733: #1c2733;
+        --c-1d1d1f: #1d1d1f;
+        --c-1e1e1e: #1e1e1e;
+        --c-1e1e21: #1e1e21;
+        --c-1e1f24: #1e1f24;
+        --c-1f1f1f: #1f1f1f;
+        --c-1f2836: #1f2836;
+        --c-202022: #202022;
+        --c-202024: #202024;
+        --c-20242b: #20242b;
+        --c-22242a: #22242a;
+        --c-22d3ee: #22d3ee;
+        --c-232326: #232326;
+        --c-232327: #232327;
+        --c-242424: #242424;
+        --c-242a37: #242a37;
+        --c-262626: #262626;
+        --c-26262a: #26262a;
+        --c-26262b: #26262b;
+        --c-26262e: #26262e;
+        --c-26272e: #26272e;
+        --c-26324e: #26324e;
+        --c-2a0d1c: #2a0d1c;
+        --c-2a0d2c: #2a0d2c;
+        --c-2a2440: #2a2440;
+        --c-2a2a2a: #2a2a2a;
+        --c-2a2a2d: #2a2a2d;
+        --c-2a2a2e: #2a2a2e;
+        --c-2a2c33: #2a2c33;
+        --c-2a2d34: #2a2d34;
+        --c-2a2f22: #2a2f22;
+        --c-2a3140: #2a3140;
+        --c-2a3a33: #2a3a33;
+        --c-2b1a02: #2b1a02;
+        --c-2b2b2b: #2b2b2b;
+        --c-2b2b2e: #2b2b2e;
+        --c-2b2b2f: #2b2b2f;
+        --c-2b4a6b: #2b4a6b;
+        --c-2c2c2c: #2c2c2c;
+        --c-2e2a17: #2e2a17;
+        --c-2e2e2e: #2e2e2e;
+        --c-2e2e30: #2e2e30;
+        --c-2e2e33: #2e2e33;
+        --c-2e4257: #2e4257;
+        --c-2e6a45: #2e6a45;
+        --c-2f2f2f: #2f2f2f;
+        --c-2f3037: #2f3037;
+        --c-2f3540: #2f3540;
+        --c-2f5b4b: #2f5b4b;
+        --c-2f6fed: #2f6fed;
+        --c-303030: #303030;
+        --c-33343a: #33343a;
+        --c-33353b: #33353b;
+        --c-363636: #363636;
+        --c-3a271f: #3a271f;
+        --c-3a3a3a: #3a3a3a;
+        --c-3a3c44: #3a3c44;
+        --c-3a3d46: #3a3d46;
+        --c-3a3e48: #3a3e48;
+        --pill-bg: rgba(58,62,72,.55); --pill-border: rgba(75,79,90,.75); /* 컨트롤 알약 반투명(프레임 이미지 살짝 비침) — 다크 */
+        --gen-overlay: rgba(20,21,26,.5); --gen-overlay-fg: #c9cdd6; /* 생성중 오버레이 — 다크(프레임 톤 맞춤) */
+        --c-3a4a6a: #3a4a6a;
+        --c-3d2f73: #3d2f73;
+        --c-3d3d3d: #3d3d3d;
+        --c-3ecf8e: #3ecf8e;
+        --c-47474b: #47474b;
+        --c-4a3f6e: #4a3f6e;
+        --c-4a4a4a: #4a4a4a;
+        --c-4a4a4d: #4a4a4d;
+        --c-4a4a52: #4a4a52;
+        --c-4a4f5a: #4a4f5a;
+        --c-4a5266: #4a5266;
+        --c-4a6cf0: #4a6cf0;
+        --c-4aa3ff: #4aa3ff;
+        --c-4ac6a8: #4ac6a8;
+        --c-4b4f5a: #4b4f5a;
+        --c-4caf50: #4caf50;
+        --c-5a606c: #5a606c;
+        --c-5aa0ff: #5aa0ff;
+        --c-5ad1c8: #5ad1c8;
+        --c-5b6270: #5b6270;
+        --c-5f6678: #5f6678;
+        --c-5fd08a: #5fd08a;
+        --c-62b6f7: #62b6f7;
+        --c-6a2e3a: #6a2e3a;
+        --c-6a6a6e: #6a6a6e;
+        --c-6a8fe0: #6a8fe0;
+        --c-6ac06a: #6ac06a;
+        --c-6b5a2a: #6b5a2a;
+        --c-6b6b70: #6b6b70;
+        --c-6b7280: #6b7280;
+        --c-6b7284: #6b7284;
+        --c-6b7385: #6b7385;
+        --c-6ee7c8: #6ee7c8;
+        --c-7c5cff: #7c5cff;
+        --c-7c828f: #7c828f;
+        --c-7cd992: #7cd992;
+        --c-7f869a: #7f869a;
+        --c-7f9cff: #7f9cff;
+        --c-808080: #808080;
+        --c-818cf8: #818cf8;
+        --c-8a8a8a: #8a8a8a;
+        --c-8b6cff: #8b6cff;
+        --c-8b92a0: #8b92a0;
+        --c-8b94a7: #8b94a7;
+        --c-8b9cff: #8b9cff;
+        --c-9096a3: #9096a3;
+        --c-95a0b5: #95a0b5;
+        --c-9a6cff: #9a6cff;
+        --c-9aa0ad: #9aa0ad;
+        --c-9aa0b0: #9aa0b0;
+        --c-9fb0d0: #9fb0d0;
+        --c-9fd2ff: #9fd2ff;
+        --c-a3e635: #a3e635;
+        --c-a7adb9: #a7adb9;
+        --c-aeb6c8: #aeb6c8;
+        --c-b57bff: #b57bff;
+        --c-c0344b: #c0344b;
+        --c-c0392b: #c0392b;
+        --c-c084fc: #c084fc;
+        --c-c3c7d0: #c3c7d0;
+        --c-c8cdd8: #c8cdd8;
+        --c-c98ad9: #c98ad9;
+        --c-c9a24b: #c9a24b;
+        --c-c9b8ff: #c9b8ff;
+        --c-c9cdd6: #c9cdd6;
+        --c-cfc4ff: #cfc4ff;
+        --c-cfd6e4: #cfd6e4;
+        --c-d3d6dd: #d3d6dd;
+        --c-d64bb0: #d64bb0;
+        --c-dadce0: #dadce0;
+        --c-dfe4ee: #dfe4ee;
+        --c-e0463f: #e0463f;
+        --c-e05a9c: #e05a9c;
+        --c-e06a6a: #e06a6a;
+        --c-e0725a: #e0725a;
+        --c-e0c341: #e0c341;
+        --c-e6e8ee: #e6e8ee;
+        --c-e7ecf5: #e7ecf5;
+        --c-e879f9: #e879f9;
+        --c-e8a3a3: #e8a3a3;
+        --c-e8ebf2: #e8ebf2;
+        --c-e8f1ff: #e8f1ff;
+        --c-e9ebf1: #e9ebf1;
+        --c-eef0f4: #eef0f4;
+        --c-efd7f6: #efd7f6;
+        --c-f0f0f2: #f0f0f2;
+        --c-f2f2f2: #f2f2f2;
+        --c-f472b6: #f472b6;
+        --c-f59e0b: #f59e0b;
+        --c-ff0000: #ff0000;
+        --c-ff00ff: #ff00ff;
+        --c-ff5060: #ff5060;
+        --c-ff5c8a: #ff5c8a;
+        --c-ff5d75: #ff5d75;
+        --c-ff6b7d: #ff6b7d;
+        --c-ff7a8a: #ff7a8a;
+        --c-ff8896: #ff8896;
+        --c-ff8a9b: #ff8a9b;
+        --c-ff8ab5: #ff8ab5;
+        --c-ff8f5a: #ff8f5a;
+        --c-ff9aa8: #ff9aa8;
+        --c-ff9db0: #ff9db0;
+        --c-ffb454: #ffb454;
+        --c-ffbfa8: #ffbfa8;
+        --c-ffce5a: #ffce5a;
+        --c-ffd7dc: #ffd7dc;
+        --c-ffd7e6: #ffd7e6;
+        --c-ffd9a0: #ffd9a0;
+        --c-ffe9a8: #ffe9a8;
+        --c-ffff00: #ffff00;
+        --canvas-bg: #242424; --canvas-dot: #404040;
+        --dock-bg: rgba(16,18,26,.97); --dock-border: #363636; --dock-fg: #e8ebf2; --dock-active-bg: #e8ebf2; --dock-active-fg: #202022; --dock-active-border: #ffffff;
+        --topbtn-bg: #262626; --topbtn-fg: #e8ebf2; --topbtn-border: #3a3a3a;
+        --node-shadow: 0 24px 60px -24px rgba(0,0,0,.62), 0 2px 10px -2px rgba(0,0,0,.4);
+        --float-shadow: 0 10px 28px rgba(0,0,0,.5);
+        --node-frame-1: #26272e; --node-frame-2: #191a1f;
+        --tip-bg: rgba(20,22,29,.97); --row-hover: #14171f; --scroll-thumb: #4a4a4d; --scroll-thumb-hover: #6a6a6e;
+        --text-shadow: 0 1px 3px rgba(0,0,0,.7); --shadow-modal: 0 30px 80px rgba(0,0,0,.6); --shadow-pop: 0 16px 40px rgba(0,0,0,.55); --shadow-sm: 0 3px 10px rgba(0,0,0,.35); --divider: #3a3c44; --tile-shadow: 4px 0 6px rgba(25,25,25,.9);
+        --shelf-shadow-fixed: 0 -8px 24px rgba(0,0,0,.4); --shelf-shadow-float: 0 16px 44px rgba(0,0,0,.55);
+        --home-bg: #161616; --home-side-bg: #111112; --home-line: #262626;
+        --project-card-bg: #1d1d1f; --project-card-border: #333333; --project-card-icon: #3f3f3f; --project-card-action-bg: rgba(0,0,0,.6);
+        --c-333333: #333333; --c-222222: #222222;
+      }
+      :root[data-theme="light"] {
+        --c-0000ff: #0000ff;
+        --c-00ff00: #00ff00;
+        --c-00ffff: #00ffff;
+        --c-06302c: #fbfbfb;
+        --c-0b0b0e: #fbfbfb;
+        --c-0b1a2b: #fbfbfb;
+        --c-0c0c0c: #fbfbfb;
+        --c-0c1f16: #fbfbfb;
+        --c-0c1f1a: #fbfbfb;
+        --c-0d0f14: #fbfbfb;
+        --c-111112: #fbfbfb;
+        --c-12b6c9: #12b6c9;
+        --c-141418: #fbfbfb;
+        --c-14351f: #e7e7e7;
+        --c-151515: #fbfbfb;
+        --c-151922: #fbfbfb;
+        --c-161616: #fbfbfb;
+        --c-16171b: #fbfbfb;
+        --c-16293a: #e7e7e7;
+        --c-16332a: #e7e7e7;
+        --c-17191e: #fbfbfb;
+        --c-182231: #e7e7e7;
+        --c-191919: #fbfbfb;
+        --c-191a1f: #fbfbfb;
+        --c-1a1a1a: #fbfbfb;
+        --c-1a1a1c: #fbfbfb;
+        --c-1a1d26: #fbfbfb;
+        --c-1a2605: #fbfbfb;
+        --c-1b1b1b: #fbfbfb;
+        --c-1b1b1e: #ffffff;
+        --c-1b1c21: #fbfbfb;
+        --c-1b1e25: #fbfbfb;
+        --c-1c1c1c: #fbfbfb;
+        --c-1c1c1f: #fbfbfb;
+        --c-1c2733: #e7e7e7;
+        --c-1d1d1f: #fbfbfb;
+        --c-1e1e1e: #fbfbfb;
+        --c-1e1e21: #ffffff;
+        --c-1e1f24: #fbfbfb;
+        --c-1f1f1f: #fbfbfb;
+        --c-1f2836: #e7e7e7;
+        --c-202022: #fbfbfb;
+        --c-202024: #fbfbfb;
+        --c-20242b: #e7e7e7;
+        --c-22242a: #e7e7e7;
+        --c-22d3ee: #22d3ee;
+        --c-232326: #ffffff;
+        --c-232327: #ffffff;
+        --c-242424: #e7e7e7;
+        --c-242a37: #e7e7e7;
+        --c-262626: #ffffff;
+        --c-26262a: #ffffff;
+        --c-26262b: #ffffff;
+        --c-26262e: #ffffff;
+        --c-26272e: #e7e7e7;
+        --c-26324e: #e7e7e7;
+        --c-2a0d1c: #fbfbfb;
+        --c-2a0d2c: #fbfbfb;
+        --c-2a2440: #e7e7e7;
+        --c-2a2a2a: #e1e3e8;
+        --c-2a2a2d: #ffffff;
+        --c-2a2a2e: #ffffff;
+        --c-2a2c33: #e7e7e7;
+        --c-2a2d34: #e7e7e7;
+        --c-2a2f22: #e7e7e7;
+        --c-2a3140: #e7e7e7;
+        --c-2a3a33: #e7e7e7;
+        --c-2b1a02: #fbfbfb;
+        --c-2b2b2b: #e7e7e7;
+        --c-2b2b2e: #e7e7e7;
+        --c-2b2b2f: #e1e3e8;
+        --c-2b4a6b: #2b4a6b;
+        --c-2c2c2c: #e7e7e7;
+        --c-2e2a17: #fbfbfb;
+        --c-2e2e2e: #e7e7e7;
+        --c-2e2e30: #e7e7e7;
+        --c-2e2e33: #e1e3e8;
+        --c-2e4257: #e7e7e7;
+        --c-2e6a45: #2e6a45;
+        --c-2f2f2f: #e1e3e8;
+        --c-2f3037: #e7e7e7;
+        --c-2f3540: #e7e7e7;
+        --c-2f5b4b: #e7e7e7;
+        --c-2f6fed: #2f6fed;
+        --c-303030: #e7e7e7;
+        --c-33343a: #e7e7e7;
+        --c-33353b: #e7e7e7;
+        --c-363636: #e1e3e8;
+        --c-3a271f: #e7e7e7;
+        --c-3a3a3a: #d8dce4;
+        --c-3a3c44: #e7e7e7;
+        --c-3a3d46: #e7e7e7;
+        --c-3a3e48: #e7e7e7;
+        --pill-bg: rgba(255,255,255,.6); --pill-border: rgba(180,184,192,.75); /* 컨트롤 알약 반투명(프레임 이미지 살짝 비침) — 라이트 */
+        --gen-overlay: rgba(255,255,255,.62); --gen-overlay-fg: #5f6678; /* 생성중 오버레이 — 라이트(화이트 프로스트) */
+        --c-3a4a6a: #3a4a6a;
+        --c-3d2f73: #3d2f73;
+        --c-3d3d3d: #e7e7e7;
+        --c-3ecf8e: #3ecf8e;
+        --c-47474b: #e7e7e7;
+        --c-4a3f6e: #4a3f6e;
+        --c-4a4a4a: #d8dce4;
+        --c-4a4a4d: #e7e7e7;
+        --c-4a4a52: #cccccc;
+        --c-4a4f5a: #cccccc;
+        --c-4a5266: #cccccc;
+        --c-4a6cf0: #4a6cf0;
+        --c-4aa3ff: #4aa3ff;
+        --c-4ac6a8: #4ac6a8;
+        --c-4b4f5a: #cccccc;
+        --c-4caf50: #4caf50;
+        --c-5a606c: #cccccc;
+        --c-5aa0ff: #5aa0ff;
+        --c-5ad1c8: #5ad1c8;
+        --c-5b6270: #cccccc;
+        --c-5f6678: #a8a8a8;
+        --c-5fd08a: #5fd08a;
+        --c-62b6f7: #62b6f7;
+        --c-6a2e3a: #6a2e3a;
+        --c-6a6a6e: #a8a8a8;
+        --c-6a8fe0: #6a8fe0;
+        --c-6ac06a: #6ac06a;
+        --c-6b5a2a: #6b5a2a;
+        --c-6b6b70: #a8a8a8;
+        --c-6b7280: #a8a8a8;
+        --c-6b7284: #a8a8a8;
+        --c-6b7385: #a8a8a8;
+        --c-6ee7c8: #6ee7c8;
+        --c-7c5cff: #7c5cff;
+        --c-7c828f: #757575;
+        --c-7cd992: #7cd992;
+        --c-7f869a: #727272;
+        --c-7f9cff: #7f9cff;
+        --c-808080: #a8a8a8;
+        --c-818cf8: #818cf8;
+        --c-8a8a8a: #757575;
+        --c-8b6cff: #8b6cff;
+        --c-8b92a0: #6a6a6a;
+        --c-8b94a7: #666666;
+        --c-8b9cff: #8b9cff;
+        --c-9096a3: #666666;
+        --c-95a0b5: #5a5a5a;
+        --c-9a6cff: #9a6cff;
+        --c-9aa0ad: #5b5b5b;
+        --c-9aa0b0: #5a5a5a;
+        --c-9fb0d0: #9fb0d0;
+        --c-9fd2ff: #9fd2ff;
+        --c-a3e635: #a3e635;
+        --c-a7adb9: #4f4f4f;
+        --c-aeb6c8: #444444;
+        --c-b57bff: #b57bff;
+        --c-c0344b: #c0344b;
+        --c-c0392b: #c0392b;
+        --c-c084fc: #c084fc;
+        --c-c3c7d0: #363636;
+        --c-c8cdd8: #2f2f2f;
+        --c-c98ad9: #c98ad9;
+        --c-c9a24b: #c9a24b;
+        --c-c9b8ff: #c9b8ff;
+        --c-c9cdd6: #303030;
+        --c-cfc4ff: #cfc4ff;
+        --c-cfd6e4: #262626;
+        --c-d3d6dd: #272727;
+        --c-d64bb0: #d64bb0;
+        --c-dadce0: #222222;
+        --c-dfe4ee: #1f1f1f;
+        --c-e0463f: #e0463f;
+        --c-e05a9c: #e05a9c;
+        --c-e06a6a: #e06a6a;
+        --c-e0725a: #e0725a;
+        --c-e0c341: #e0c341;
+        --c-e6e8ee: #1f1f1f;
+        --c-e7ecf5: #1f1f1f;
+        --c-e879f9: #e879f9;
+        --c-e8a3a3: #e8a3a3;
+        --c-e8ebf2: #1f1f1f;
+        --c-e8f1ff: #1f1f1f;
+        --c-e9ebf1: #1f1f1f;
+        --c-eef0f4: #1f1f1f;
+        --c-efd7f6: #1f1f1f;
+        --c-f0f0f2: #1f1f1f;
+        --c-f2f2f2: #1f1f1f;
+        --c-f472b6: #f472b6;
+        --c-f59e0b: #f59e0b;
+        --c-ff0000: #ff0000;
+        --c-ff00ff: #ff00ff;
+        --c-ff5060: #ff5060;
+        --c-ff5c8a: #ff5c8a;
+        --c-ff5d75: #ff5d75;
+        --c-ff6b7d: #ff6b7d;
+        --c-ff7a8a: #ff7a8a;
+        --c-ff8896: #ff8896;
+        --c-ff8a9b: #ff8a9b;
+        --c-ff8ab5: #ff8ab5;
+        --c-ff8f5a: #ff8f5a;
+        --c-ff9aa8: #ff9aa8;
+        --c-ff9db0: #ff9db0;
+        --c-ffb454: #ffb454;
+        --c-ffbfa8: #ffbfa8;
+        --c-ffce5a: #ffce5a;
+        --c-ffd7dc: #1f1f1f;
+        --c-ffd7e6: #1f1f1f;
+        --c-ffd9a0: #ffd9a0;
+        --c-ffe9a8: #ffe9a8;
+        --c-ffff00: #ffff00;
+        --canvas-bg: #e3e5ea; --canvas-dot: #c4c8d0;
+        --dock-bg: #ffffff; --dock-border: #cfd2d9; --dock-fg: #333842; --dock-active-bg: #2f6fed; --dock-active-fg: #ffffff; --dock-active-border: #2f6fed;
+        --topbtn-bg: #ffffff; --topbtn-fg: #2c3038; --topbtn-border: #d5d8de;
+        --home-bg: #fbfbfc; --home-side-bg: #ffffff; --home-line: #e1e3e8;
+        --project-card-bg: #eef0f4; --project-card-border: #d8dbe2; --project-card-icon: #9aa1ad; --project-card-action-bg: rgba(255,255,255,.92);
+        --node-shadow: 0 6px 18px -10px rgba(0,0,0,.13), 0 1px 3px -1px rgba(0,0,0,.07);
+        --float-shadow: 0 6px 16px rgba(0,0,0,.10);
+        --node-frame-1: #ffffff; --node-frame-2: #f2f4f6;
+        --tip-bg: rgba(255,255,255,.98); --row-hover: #eef4ff; --scroll-thumb: #c7cad0; --scroll-thumb-hover: #aeb2ba;
+        --text-shadow: none; --shadow-modal: none; --shadow-pop: 0 10px 30px -12px rgba(0,0,0,.14); --shadow-sm: 0 2px 6px rgba(0,0,0,.10); --divider: #e3e5ea; --tile-shadow: none;
+        --shelf-shadow-fixed: 0 -6px 20px -8px rgba(0,0,0,.13); --shelf-shadow-float: 0 14px 36px -14px rgba(0,0,0,.17);
+        --c-333333: #333842; --c-222222: #333842;
+      }
+      /* 캔버스 배경/점 — react-flow 자체 배경을 테마 var로. 점은 SVG fill을 CSS로 덮어 적용 */
+      /* pane엔 배경 금지 — Background(점 svg, z:-1) 위 레이어라 칠하면 점이 전부 가려짐(2026-07-16 회원 리포트: 점 실종). 루트만 칠한다. */
+      .react-flow, .react-flow__viewport-portal { background: var(--canvas-bg) !important; }
+      .react-flow__background circle, .react-flow__background path { fill: var(--canvas-dot) !important; }
+      .proj-row:not(.is-active):hover { background: var(--row-hover) !important; }
       .proj-row:hover .proj-del { opacity: 1 !important; }
       /* 홈 갤러리 카드 — 호버 시 테두리 강조 + 삭제 버튼 노출 */
       .proj-card:hover > div:first-child { border-color: #7c5cff !important; }
       .proj-card:hover .proj-card-del { opacity: 1 !important; }
-      .add-item:not(:disabled):hover { background: #1f2431 !important; }
+      .add-item:not(.is-active):not(:disabled):hover { background: var(--row-hover) !important; }
       /* 연결 중 대상 핸들: 연결 가능=색 변화 없음, 불가=빨강 (v12 클래스 넓게 커버) */
       .react-flow__handle.connectingto:not(.valid):not(.react-flow__handle-valid) {
         background: #ff4d6d !important; box-shadow: 0 0 0 4px rgba(255,77,109,.5) !important;
@@ -27,6 +470,8 @@
       .react-flow__pane.dragging { cursor: grabbing !important; }
       /* 생성 중 로딩 스피너 회전 */
       @keyframes nova-spin { to { transform: rotate(360deg); } }
+      /* 노드 호버 UI(툴바·컨트롤행) 부드러운 등장 — display:none→flex가 팍 튀는 것 완화 */
+      @keyframes cf-fade-in { from { opacity: 0; } to { opacity: 1; } }
       /* 다중 선택 후 남는 묶음 상자 숨김 — 그룹(프레임) 기능이 따로 있어 불필요. 선택 표시는 노드 테두리로 충분,
          선택 노드 아무거나 끌면 같이 이동하는 동작은 유지됨 */
       .react-flow__nodesselection-rect { display: none !important; }
@@ -39,26 +484,26 @@
         -webkit-appearance: none; appearance: none; height: 14px; background: transparent; cursor: pointer; margin: 0;
       }
       input[type="range"].sbs-slider::-webkit-slider-runnable-track {
-        height: 2px; border-radius: 2px; background: #4a4a4d;
+        height: 2px; border-radius: 2px; background: var(--scroll-thumb);
       }
       input[type="range"].sbs-slider::-webkit-slider-thumb {
         -webkit-appearance: none; appearance: none; width: 11px; height: 11px; border-radius: 50%;
-        background: #c3c7d0; border: 1px solid #6b6b70; margin-top: -5px;
+        background: var(--c-c3c7d0); border: 1px solid var(--c-6b6b70); margin-top: -5px;
       }
-      input[type="range"].sbs-slider:hover::-webkit-slider-thumb { background: #e8ebf2; }
-      input[type="range"].sbs-slider::-moz-range-track { height: 2px; border-radius: 2px; background: #4a4a4d; }
+      input[type="range"].sbs-slider:hover::-webkit-slider-thumb { background: var(--c-e8ebf2); }
+      input[type="range"].sbs-slider::-moz-range-track { height: 2px; border-radius: 2px; background: var(--scroll-thumb); }
       input[type="range"].sbs-slider::-moz-range-thumb {
-        width: 11px; height: 11px; border-radius: 50%; background: #c3c7d0; border: 1px solid #6b6b70;
+        width: 11px; height: 11px; border-radius: 50%; background: var(--c-c3c7d0); border: 1px solid var(--c-6b6b70);
       }
       /* 노드 연결선(엣지)·연결 중 라인 — 기본이 얇아 잘 안 보여 두껍게 */
       .react-flow__edge-path { stroke-width: 2.2px; }
       .react-flow__connection-path, .react-flow__connectionline path { stroke-width: 2.2px; }
       /* 앱 전역 스크롤바 — 어두운 얇은 바(기본 밝은 스크롤바가 다크 UI에 튀는 것 방지). 텍스트영역·드롭다운·패널 공통 */
-      * { scrollbar-width: thin; scrollbar-color: #4a4a4d transparent; }
+      * { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
       *::-webkit-scrollbar { width: 8px; height: 8px; }
       *::-webkit-scrollbar-track { background: transparent; }
-      *::-webkit-scrollbar-thumb { background: #4a4a4d; border-radius: 4px; }
-      *::-webkit-scrollbar-thumb:hover { background: #6a6a6e; }
+      *::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 4px; }
+      *::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
       /* 레퍼런스 노드 썸네일 줄 가로 스크롤바 — 노드 테마(앰버)에 맞춘 얇은 바 */
       .ref-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,180,84,.55) transparent; }
       .ref-scroll::-webkit-scrollbar { height: 6px; }
@@ -76,15 +521,15 @@
       .cf-thumb.sortable-chosen, .cf-thumb:active { cursor: grabbing; }
       /* 수치 직접 타이핑 필드 — 평소 텍스트처럼 자연스럽게, 호버/포커스 때만 아주 옅은 배경 */
       .num-field { border: 0; background: transparent; border-radius: 4px; outline: none; }
-      .num-field:hover { background: #2a2a2d; }
-      .num-field:focus { background: #2a2a2d; }
-      .num-field::selection { background: #3d3d42; }
+      .num-field:hover { background: var(--row-hover); }
+      .num-field:focus { background: var(--row-hover); }
+      .num-field::selection { background: var(--c-cfc4ff); }
       /* 그룹 프레임은 몸통을 클릭 통과시켜 안쪽 노드·연결선(삭제 점)을 조작 가능하게. 헤더·리사이즈 핸들만 잡힘 */
       .react-flow__node-frame { pointer-events: none !important; }
       .react-flow__node-frame .cf-frame-header,
       .react-flow__node-frame .react-flow__resize-control { pointer-events: auto !important; }
     </style>
-    <script type="module" crossorigin src="/app/assets/index-DV6pIDCV.js"></script>
+    <script type="module" crossorigin src="/app/assets/index-CX6-Sq0r.js"></script>
     <link rel="stylesheet" crossorigin href="/app/assets/index-B2Kz5wtG.css">
   </head>
   <body>
