@@ -1,0 +1,15 @@
+{
+  "name": "ClipFusion",
+  "short_name": "ClipFusion",
+  "description": "노드 기반 AI 이미지 생성·편집 캔버스",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141416",
+  "theme_color": "#141416",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "file_handlers": [
+    { "action": "/", "accept": { "application/x-clipfusion": [".cfp"] } }
+  ]
+}

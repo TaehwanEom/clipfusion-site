@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- 앱 아이콘 — 기존 파비콘(🎬)과 동일 모티프, 다크 라운드 배경(2026-07-18 PWA 설치용) -->
+  <rect width="512" height="512" rx="112" fill="#141416"/>
+  <text x="256" y="256" text-anchor="middle" dominant-baseline="central" font-size="300">🎬</text>
+</svg>
