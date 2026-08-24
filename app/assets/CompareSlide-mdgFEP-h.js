@@ -1,4 +1,4 @@
-import{r as dt,j as Ot}from"./fal-Dz6x44ef.js";/**
+import{r as dt,j as Ot}from"./fal-RBzjaJQ1.js";/**
  * @license
  * Copyright 2010-2026 Three.js Authors
  * SPDX-License-Identifier: MIT
